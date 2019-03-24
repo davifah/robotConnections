@@ -3,6 +3,7 @@ Conexões e códigos de controle para o robô da equipe GENESIS para a RoboCupRe
 python v3.6.7
 arduino IDE v1.8.8
 VSCode v1.31
+
 Bibliotecas
   RPi:
     apscheduler
