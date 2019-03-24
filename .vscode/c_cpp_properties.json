@@ -3,15 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "/home/davifah/Arduino/libraries/ArduinoJson/src",
-                "/home/davifah/Downloads/arduino-1.8.8/tools/**",
-                "/home/davifah/Downloads/arduino-1.8.8/hardware/tools/**",
-                "/home/davifah/Downloads/arduino-1.8.8/hardware/arduino/avr/**",
-                "/home/davifah/Downloads/arduino-1.8.8/libraries/ArduinoJson/**",
+                "/home/davifah/Documentos/arduino-1.8.9/tools/**",
+                "/home/davifah/Documentos/arduino-1.8.9/hardware/tools/**",
+                "/home/davifah/Documentos/arduino-1.8.9/hardware/arduino/avr/**",
                 "/home/davifah/Arduino/libraries/**"
             ],
             "forcedInclude": [
-                "/home/davifah/Downloads/arduino-1.8.8/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "/home/davifah/Documentos/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h"
             ],
             "intelliSenseMode": "gcc-x64",
             "compilerPath": "/usr/bin/gcc",
