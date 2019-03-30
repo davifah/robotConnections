@@ -7,12 +7,12 @@ function getInput(){
     controleConectado = input.connected;    // Prevenção de erro: controle desconectar sem ativar evento
 
     var controle = {
-        LBallHor: input.axes[0].toFixed(3),
-        LBallVer: input.axes[1].toFixed(3),
-        RBallHor: input.axes[2].toFixed(3),
-        RBallVer: input.axes[3].toFixed(3),
-        LTrigger: input.buttons[6].value.toFixed(3),
-        RTrigger: input.buttons[7].value.toFixed(3),
+        LBallHor: input.axes[0].toFixed(3)*1000,
+        LBallVer: input.axes[1].toFixed(3)*1000,
+        RBallHor: input.axes[2].toFixed(3)*1000,
+        RBallVer: input.axes[3].toFixed(3)*1000,
+        LTrigger: input.buttons[6].value.toFixed(3)*1000,
+        RTrigger: input.buttons[7].value.toFixed(3)*1000,
         Rbutton: input.buttons[4].pressed,
         Lbutton: input.buttons[5].pressed,
         buttonA: input.buttons[0].pressed,
@@ -43,7 +43,6 @@ window.addEventListener("gamepaddisconnected", (event) => {
 function postControle(){
     controle = getInput();
     controle.usuario = usuario;
-
     $.post(URL,JSON.stringify(controle),function(dados,status){
         
         $('#test').text(dados);

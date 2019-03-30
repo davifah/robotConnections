@@ -1,11 +1,12 @@
-#include<ArduinoJson.h>
+#include <ArduinoJson.h>
 
 const int led = 7;
+const int red = 9;
 int i = 0;
 
 // ============ Funções de tempo ==========
 
-const int ticks = 1;
+const int ticks = 10;
 
 typedef struct t {
     unsigned long tStart;
@@ -26,7 +27,10 @@ void tRun (struct t *t) {
 
 void setup() {
   pinMode(led,OUTPUT);
+  pinMode(red,OUTPUT);
   Serial.begin(115200);
+  Serial1.begin(115200);
+    digitalWrite(red,HIGH);
 }
 
 void loop() {
@@ -36,8 +40,28 @@ void loop() {
     }
 }
 
+//const char* input = "{\"RTrigger\": 1000}";
+
 void _main(void){
-  StaticJsonDocument<256> doc;
-  JsonObject input = deserializeJson(doc,Serial);
-  
+  if (Serial1.available()){
+
+    digitalWrite(red,LOW);
+    
+/*    String input = Serial1.readString();
+    if (!input)
+      digitalWrite(led,HIGH);*/
+
+    StaticJsonDocument<500> doc;
+    DeserializationError jsonErro = deserializeJson(doc, Serial1);
+
+    int RTrigger = doc["RTrigger"];
+
+    analogWrite(led,map(RTrigger,0,1000,0,255));
+
+  }else{
+
+    digitalWrite(red,HIGH);
+    digitalWrite(led,LOW);
+
+  }
 }

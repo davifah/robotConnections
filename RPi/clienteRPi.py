@@ -9,19 +9,19 @@ import json
 # ============ Variáveis =============
 ticks = 60
 URL = 'http://127.0.0.1:8080'
-arduinoPort = '/dev/ttyACM0'
+arduinoPort = '/dev/serial0'
 usuario = 'RPi'
 
-#ser = serial.Serial( arduinoPort, 115200 )  #cria uma instância para porta serial
+ser = serial.Serial( arduinoPort, 115200 )  #cria uma instância para porta serial
 sched = BlockingScheduler()                 #cria uma instância para loop de intervalo
 
 # ========= Função Principal ========
 def main():
 
     dados = json.loads(requests.get( URL, params= {'usuario': usuario}).content.decode('utf-8'))
-    print(type(dados['RTrigger']))
-    print(float(dados['RTrigger']))
+    print(dados)
+    ser.write(dados+"\n")
 
+# ======= Criação de loop de intervalo
 sched.add_job(main, 'interval', seconds=1/ticks)
-
 sched.start()
