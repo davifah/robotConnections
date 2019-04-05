@@ -43,7 +43,6 @@ window.addEventListener("gamepaddisconnected", (event) => {
 function postControle(){
     controle = getInput();
     controle.usuario = usuario;
-    $('#test').text(JSON.stringify(controle));
     $.post(URL,JSON.stringify(controle),function(dados,status){
         
         $('#test').text(dados);
