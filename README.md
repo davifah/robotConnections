@@ -16,7 +16,7 @@ Bibliotecas
    Arduino:
     ArduinoJson (v6)
 
-A fazer:__
-  testar maior baudrate serial__
-  Adpatar para controle de PS4__
-  alterar entrada de string serial arduino (menos ram)__
+A fazer:<br/>
+  testar maior baudrate serial<br/>
+  Adpatar para controle de PS4<br/>
+  alterar entrada de string serial arduino (menos ram)<br/>
