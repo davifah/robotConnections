@@ -11,6 +11,7 @@ ticks = 60
 URL = 'http://192.168.0.17:8080'
 arduinoPort = '/dev/ttyS0'
 usuario = 'RPi'
+baudrate = 112500
 
 # ========= Função Background ========
 def main():
@@ -24,7 +25,7 @@ def main():
 if __name__ == '__main__':
 
     # =========== Instâncias =========
-    ser = serial.Serial( arduinoPort, 115200 )
+    ser = serial.Serial( arduinoPort, baudrate )
         #cria uma instância para porta serial
     sched = BackgroundScheduler({'apscheduler.job_defaults.max_instances': '20'})
         #cria uma instância para loop de intervalo
