@@ -2,5 +2,6 @@
     "python.linting.mypyEnabled": false,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "C_Cpp.intelliSenseEngineFallback": "Enabled"
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled"
 }

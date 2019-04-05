@@ -28,9 +28,9 @@ class pyServer:
 
 		print(entrada)
 
-		if entrada.usuario == 'ui':
+		if entrada["usuario"] == 'ui':
 			pass
-		elif entrada.usuario == 'RPi':
+		elif entrada["usuario"] == 'RPi':
 			return json.dumps(app.controleDados)
 
 	def POST(self, name):
@@ -43,7 +43,7 @@ class pyServer:
 
 		if dados["usuario"] == 'ui':
 			app.controleDados = dados
-			print (json.dumps(app.controleDados["LTrigger"]))
+			print (app.controleDados["RTrigger"])
 			return None
 		elif dados["usuario"] == 'RPi':
 			return None
