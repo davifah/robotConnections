@@ -7,24 +7,33 @@ function getInput(){
     controleConectado = input.connected;    // Prevenção de erro: controle desconectar sem ativar evento
 
     var controle = {
-        LBallX: input.axes[0].toFixed(3)*1000,
-        LBallY: input.axes[1].toFixed(3)*-1000,     //Negativo para o sentido do eixo Y ser para frente 
-        RBallX: input.axes[2].toFixed(3)*1000,
-        RBallY: input.axes[3].toFixed(3)*-1000,     //Negativo para o sentido do eixo Y ser para frente
-        LTrigger: input.buttons[6].value.toFixed(3)*1000,
-        RTrigger: input.buttons[7].value.toFixed(3)*1000,
-        Rbutton: input.buttons[4].pressed,
-        Lbutton: input.buttons[5].pressed,
-        buttonC: input.buttons[0].pressed,          //Cruz
-        buttonB: input.buttons[1].pressed,          //Bola
-        buttonT: input.buttons[2].pressed,          //Triangulo
-        buttonQ: input.buttons[3].pressed,          //Quadrado
-        buttonUp: input.buttons[12].pressed,
-        buttonDown: input.buttons[13].pressed,
-        buttonLeft: input.buttons[14].pressed,
-        buttonRight: input.buttons[15].pressed,
-        buttonShare: input.buttons[8].pressed,
-        buttonOptions: input.buttons[9].pressed,
+        lBall = {
+            x: input.axes[0].toFixed(3)*1000,
+            y: input.axes[1].toFixed(3)*-1000
+        },
+        rBall = {
+            x: input.axes[2].toFixed(3)*1000,
+            y: input.axes[3].toFixed(3)*-1000
+        },
+        triggers = {
+            left: input.buttons[6].value.toFixed(3)*1000,
+            right: input.buttons[7].value.toFixed(3)*1000
+        },
+        buttons = {
+            r1: input.buttons[4].pressed,
+            l1: input.buttons[5].pressed,
+            cross: input.buttons[0].pressed,
+            circle: input.buttons[1].pressed, 
+            triangle: input.buttons[2].pressed,
+            square: input.buttons[3].pressed,
+            up: input.buttons[12].pressed,
+            down: input.buttons[13].pressed,
+            left: input.buttons[14].pressed,
+            right: input.buttons[15].pressed,
+            share: input.buttons[8].pressed,
+            options: input.buttons[9].pressed,
+
+        },
     }
 
     return controle;
@@ -41,8 +50,8 @@ window.addEventListener("gamepaddisconnected", (event) => {
 // ======= Funções do Servidor ==========
 
 function postControle(){
-    controle = getInput();
-    controle.usuario = usuario;
+    dados.controle = getInput();
+    dados.usuario = usuario;
     $.post(URL,JSON.stringify(controle),function(dados,status){
         
         $('#test').text(dados);

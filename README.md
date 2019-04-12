@@ -18,5 +18,4 @@ Bibliotecas
 
 A fazer:<br/>
   testar maior baudrate serial<br/>
-  Adpatar para controle de PS4<br/>
   alterar entrada de string serial arduino (menos ram)<br/>
