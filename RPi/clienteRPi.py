@@ -11,14 +11,14 @@ ticks = 60
 URL = 'http://192.168.0.17:8080'
 arduinoPort = '/dev/ttyS0'
 usuario = 'RPi'
-baudrate = 112500
+baudrate = 500000
 
 # ========= Função Background ========
 def main():
 
     dados = json.loads(requests.get( URL, params= {'usuario': usuario}).content.decode('utf-8'))
 #    print(json.dumps(dados).encode('utf-8'))
-    ser.write(json.dumps(dados).encode('utf-8')+ b'\n')
+    ser.write(json.dumps(dados).encode('utf-8')+'\x03')
 
 # ======= Criação de loop de intervalo
 

@@ -43,7 +43,7 @@ class pyServer:
 
 		if dados["usuario"] == 'ui':
 			app.controleDados = dados
-			print (app.controleDados["RTrigger"])
+			print (app.controleDados["controle"]["triggers"]["right"])
 			return None
 		elif dados["usuario"] == 'RPi':
 			return None
