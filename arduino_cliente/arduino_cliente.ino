@@ -2,29 +2,9 @@
 
 const unsigned int led = 7;
 const unsigned int red = 9;
-const unsigned int baudrate = 115200
-int i = 0;
+const unsigned int baudrate = 500000
 
-// ============ Funções de tempo ==========
-
-const unsigned byte ticks = 60;
-
-typedef struct t {
-    unsigned long tStart;
-    unsigned long tTimeout;
-};
-
-t t_main = {0, 1000/ticks};
-
-bool tCheck (struct t *t ) {
-  if (millis() > t->tStart + t->tTimeout) return true; else return false;    
-}
-
-void tRun (struct t *t) {
-    t->tStart = millis();
-}
-
-// ============== Funções normais ==========
+// ============== Função de configuração ==========
 
 void setup() {
   pinMode(led,OUTPUT);
@@ -35,30 +15,23 @@ void setup() {
   Serial.println("Iniciando...");
 }
 
-void loop() {
-    if (tCheck(&t_main)) {
-      _main();
-      tRun(&t_main);
-    }
-}
+// ============== Função de loop =================
 
-void _main(void){
+void loop(){
   if (Serial1.available()){
 
     digitalWrite(red,LOW);
-
-    String input = Serial1.readStringUntil('\n'); //EOX
     
     StaticJsonDocument<500> doc;
       //adicionar o Serial1.readStringUntil() ao deserializeJson para salvar memoria e testar
-    DeserializationError jsonErro = deserializeJson(doc, input);
+    DeserializationError jsonErro = deserializeJson(doc, Serial1.readStringUntil('\x03'));
 
     if (jsonErro){
       Serial.print("Erro: ");
       Serial.println(jsonErro.c_str());
-      Serial.println(input);
+      Serial.println(doc);
     }else{
-      int RTrigger = doc["RTrigger"];
+      int RTrigger = doc["controle"]["triggers"]["left"];
       Serial.println(RTrigger);
 
       analogWrite(led,map(RTrigger,0,1000,0,255));
