@@ -76,6 +76,7 @@ window.addEventListener("gamepadconnected", (event) => {
 window.addEventListener("gamepaddisconnected", (event) => {
     controleConectado = false;
     $('#warn-controle').text("Controle: desconectado");
+    $('#warn-http').text("HTTP:");
     $('.toHide').hide();
 });
 
