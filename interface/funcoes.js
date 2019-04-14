@@ -5,23 +5,23 @@ let power = true;
 
 // ======= Funções de Status ===========
 
-function coolerStatus(){
+function coolerToggle(){
     if(cooler){
-        $('#coolerStatus').text("CoolerOn");
+        $('#coolerStatus').text("CoolerOff");
         $('#coolerStatus').css('background-color','#ff471a');
     }else{
-        $('#coolerStatus').text("CoolerOff");
+        $('#coolerStatus').text("CoolerOn");
         $('#coolerStatus').css('background-color','#00b33c');
     }
     cooler=!cooler;
 }
 
-function powerStatus(){
+function powerToggle(){
     if(power){
-        $('#powerStatus').text("PowerOn");
+        $('#powerStatus').text("PowerOff");
         $('#powerStatus').css('background-color','#ff471a');
     }else{
-        $('#powerStatus').text("PowerOff");
+        $('#powerStatus').text("PowerOn");
         $('#powerStatus').css('background-color','#00b33c');
     }
     power=!power;
