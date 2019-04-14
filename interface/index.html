@@ -15,16 +15,15 @@
 
     <span id="warn-controle" class="warning"></span><br>
     <span id="warn-web-conexao" class="warning"></span><br>
+    <span id="warn-webcam" class="warning"></span><br>
     <span id="test" class="toHide"></span><br>
 
-    <div>
-        <video id="video" width="400" height="300"></video>
-        <canvas id="canvas" width="400" height="300"></canvas>
-    </div>
+    <div id="videos"></div>
 
     <div id="buttons">
-        <button id="powerStatus" onClick="powerStatus()" class="toHide">PowerOff</button>
-        <button id="coolerStatus" onClick="coolerStatus()" class="toHide">CoolerOff</button>
+        <button id="powerStatus" onClick="powerToggle()" class="toHide">PowerOn</button>
+        <button id="coolerStatus" onClick="coolerToggle()" class="toHide">CoolerOn</button>
+        <button id="videoStatus" onClick="videoToggle()" class="toHide">PowerOff</button>
     </div>
     
 </body>
