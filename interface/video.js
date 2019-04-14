@@ -3,11 +3,11 @@ window.onload = () => {
 
     navigator.mediaDevices.enumerateDevices().then( devices => {
         devices.forEach(device => {
-            if (device.kind == "videoinput"){
+            if (device.kind == "videoinput"){   //c35c8512ff65c068ae63551b952daaab176e5396a95f597a43f1108842f6ce53
                 videoID.push(device.deviceId);
             }
         });
-        console.log(videoID.length);
+        console.log(videoID);
         buildVideo(videoID);
     });
 
