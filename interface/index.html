@@ -13,17 +13,16 @@
 </head>
 <body>
 
-    <span id="warn-controle" class="warning"></span><br>
-    <span id="warn-web-conexao" class="warning"></span><br>
+    <span id="warn-controle" class="warning">Controle: desconectado</span><br>
+    <span id="warn-http" class="warning">HTTP: </span><br>
     <span id="warn-webcam" class="warning"></span><br>
     <span id="test" class="toHide"></span><br>
 
-    <div id="videos"></div>
+    <div id="video-container"></div>
 
-    <div id="buttons">
+    <div id="button-container">
         <button id="powerStatus" onClick="powerToggle()" class="toHide">PowerOn</button>
         <button id="coolerStatus" onClick="coolerToggle()" class="toHide">CoolerOn</button>
-        <button id="videoStatus" onClick="videoToggle()" class="toHide">PowerOff</button>
     </div>
     
 </body>

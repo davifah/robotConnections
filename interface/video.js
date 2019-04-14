@@ -1,13 +1,13 @@
 window.onload = () => {
-    var videoID = [];
+    let videoID = [];
 
     navigator.mediaDevices.enumerateDevices().then( devices => {
         devices.forEach(device => {
-            if (device.kind == "videoinput"){   //c35c8512ff65c068ae63551b952daaab176e5396a95f597a43f1108842f6ce53
+            if (device.kind == "videoinput"){
+                    // add exception to ID (laptopwebcam) = && deviceId != 'c35c8512ff65c068ae63551b952daaab176e5396a95f597a43f1108842f6ce53'
                 videoID.push(device.deviceId);
             }
         });
-        console.log(videoID);
         buildVideo(videoID);
     });
 
@@ -18,7 +18,7 @@ function buildVideo(videoID){
         videoID.forEach(id => {
             let videoTag = document.createElement('VIDEO');
             videoTag.setAttribute('id',id);
-            document.getElementById('videos').appendChild(videoTag);
+            document.getElementById('video-container').appendChild(videoTag);
 
             navigator.getUserMedia({
                 video: {
@@ -33,7 +33,7 @@ function buildVideo(videoID){
             })
         });
     }
-    $('#warn-webcam').text(videoID.length+" Webcams conectadas");
+    $('#warn-webcam').text("Cameras: "+videoID.length);
 }
 
 

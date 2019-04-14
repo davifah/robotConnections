@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(209, 240, 250);
+    background-color: #333;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,15 +17,13 @@ body {
     -webkit-font-smoothing: antialiased !important;
 }
 
-#buttons {
+#button-container {
     border: none;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-#buttons button {
+#button-container button {
     height:  36px;
     width: 120px;
     background-color: #00b33c;
@@ -39,8 +37,25 @@ body {
     border: 0;
 }
 
+#video-container {
+    border: none;
+    display: flex;
+    flex-direction: row;
+}
+
+#video-container video {
+    border: solid 1px #ff6666;
+    width: 40%;
+    height: 0%;
+    margin-right: 10px;
+}
+
 button:hover {
     opacity: 0.7;
+}
+
+.toHide {
+    display: none;
 }
 
 .warning {

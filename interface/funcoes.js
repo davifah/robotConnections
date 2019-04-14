@@ -69,10 +69,14 @@ function getInput(){
 
 window.addEventListener("gamepadconnected", (event) => {
     controleConectado = true;
+    $('#warn-controle').text("Controle: conectado")
+    $('.toHide').show();
 });
 
 window.addEventListener("gamepaddisconnected", (event) => {
     controleConectado = false;
+    $('#warn-controle').text("Controle: desconectado");
+    $('.toHide').hide();
 });
 
 // ======= Funções do Servidor ==========
@@ -86,12 +90,14 @@ function postControle(){
             cooler : cooler,
         },
     };
-
     $('#test').text(JSON.stringify(dados,null,'\t'));
-    $.post(URL,JSON.stringify(dados),function(dados,status){
-        
-        $('#test').text(dados);
-        if (status != 'success')    $('#warn-web-conexao').text('Erro na conexão com o servidor');
-        else                        $('#warn-web-conexao').text('');
-    });
+
+    $.post(
+        URL,JSON.stringify(dados),
+        (res , status) => {
+            if(status == "success"){
+                $('#warn-http').text("HTTP: sucesso");
+            }
+        }
+    ).fail(() => $('#warn-http').text("HTTP: erro"));
 };
