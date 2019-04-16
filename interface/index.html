@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>GENESIS - RoboCup</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="estilos.css">
-    <script src="bibliotecas/jquery-3.3.1.js"></script>
-    <script src="main.js"></script>
-    <script src="funcoes.js"></script>
-    <script src="video.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GENESIS - RoboCup</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="estilos.css">
+	<script src="bibliotecas/jquery-3.3.1.js"></script>
+	<script src="main.js"></script>
+	<script src="funcoes.js"></script>
+	<script src="video.js"></script>
 </head>
+
 <body>
 
-    <table id="warning-table">
-        <tr>
-            <td id="warn-controle" class="warning" align="right">Controle: desconectado</td>
-            <td id="warn-http" class="warning" align="center">HTTP: </td>
-            <td id="warn-webcam" class="warning" align="left"></td>
-        </tr>
-        <tr>
-            <td id="warn-arduino" class="warning" align="right">Arduino: desconectado</td>
-            <td id="warn-temp" class="warning" align="center">Temperatura: 60°C</td>
-            <td id="warn-rpi" class="warning" align="left">RPi: desconectada</td>
-        </tr>
-    </table>
+	<span id="test" class="warning"></span>
+	<table id="warning-table">
+		<tr>
+			<td id="warn-controle" class="warning" align="right">Controle: desconectado</td>
+			<td id="warn-http" class="warning" align="center">HTTP: </td>
+			<td id="warn-webcam" class="warning" align="left"></td>
+		</tr>
+		<tr>
+			<td id="warn-arduino" class="warning" align="right">Arduino: desconectado</td>
+			<td id="warn-temp" class="warning" align="center">Temperatura: 60°C</td>
+			<td id="warn-rpi" class="warning" align="left">RPi: desconectada</td>
+		</tr>
+	</table>
 
-    <div id="video-container"></div>
+	<div id="video-container"></div>
 
-    <div id="button-container">
-        <button id="powerStatus" onClick="power=!power" class="toHide">PowerOn</button>
-        <button id="coolerStatus" onClick="cooler=!cooler" class="toHide">CoolerOn</button>
-    </div>
-    
+	<div id="button-container">
+		<button id="powerStatus" onClick="power=!power" class="toHide">PowerOn</button>
+		<button id="coolerStatus" onClick="cooler=!cooler" class="toHide">CoolerOn</button>
+	</div>
+
+
 </body>
+
 </html>

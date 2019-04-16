@@ -22,56 +22,58 @@ let temperatura = 0.00;
 const ticks = 60;
 
 // Funçao executada automaticamente $ticks vezes por segundo
-window.setInterval(function(){
+window.setInterval(function () {
 
-    setStatus();
+	setStatus();
 
-    if (controleConectado){
+	if (controleConectado) {
 
-        postHTTP(); // Executa funçao que pega dados do controle e posta no servidor
+		postHTTP(); // Executa funçao que pega dados do controle e posta no servidor
 
-        if (server)
-            getHTTP();
-    }
-},1000/ticks);
+		if (server)
+			getHTTP();
+	}
+}, 1000 / ticks);
 
 // Função de atualização dos status
-function setStatus(){
+function setStatus() {
 
-    if(!cooler){
-        $('#coolerStatus').text("CoolerOff");
-        $('#coolerStatus').css('background-color','#ff471a');
-    }else{
-        $('#coolerStatus').text("CoolerOn");
-        $('#coolerStatus').css('background-color','#00b33c');
-    }
+	if (!cooler) {
+		$('#coolerStatus').text("CoolerOff");
+		$('#coolerStatus').css('background-color', '#ff471a');
+	} else {
+		$('#coolerStatus').text("CoolerOn");
+		$('#coolerStatus').css('background-color', '#00b33c');
+	}
 
-    if(!power){
-        $('#powerStatus').text("PowerOff");
-        $('#powerStatus').css('background-color','#ff471a');
-    }else{
-        $('#powerStatus').text("PowerOn");
-        $('#powerStatus').css('background-color','#00b33c');
-    }
+	if (!power) {
+		$('#powerStatus').text("PowerOff");
+		$('#powerStatus').css('background-color', '#ff471a');
+	} else {
+		$('#powerStatus').text("PowerOn");
+		$('#powerStatus').css('background-color', '#00b33c');
+	}
 
-    if(controleConectado){
-        $('#warn-controle').text("Controle: conectado")
-        $('.toHide').show();
-    }else{
-        $('#warn-controle').text("Controle: desconectado");
-        $('#warn-http').text("HTTP:");
-        $('.toHide').hide();
-    }
+	if (controleConectado) {
+		$('#warn-controle').text("Controle: conectado")
+		$('.toHide').show();
+	} else {
+		$('#warn-controle').text("Controle: desconectado");
+		$('#warn-http').text("HTTP:");
+		$('.toHide').hide();
+	}
 
-    if(server){
-        $('#warn-http').text("HTTP: conectado");
-    }else{
-        $('#warn-http').text("HTTP: desconectado");
-    }
+	if (server) {
+		$('#warn-http').text("HTTP: conectado");
+	} else {
+		$('#warn-http').text("HTTP: desconectado");
+	}
 
-    if(RPi){
-        $('#warn-rpi').text("RPi: conectada");
-    }else{
-        $('#warn-rpi').text("RPi: desconectada");
-    }
+	if (RPi) {
+		$('#warn-rpi').text("RPi: conectada");
+		$('#warn-temp').text(`Temperatura: ${temperatura} °C`);
+	} else {
+		$('#warn-rpi').text("RPi: desconectada");
+		$('#warn-temp').text("Temperatura:");
+	}
 }
