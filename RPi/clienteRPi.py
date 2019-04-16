@@ -5,6 +5,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import serial
     #biblioteca responsável por estabelecer a comunicaçao com o Arduino (3.4)
 import json
+from gpiozero import CPUTemperature
+    #biblioteca para monitorar temperatura da cpu
 
 # ============ Variáveis =============
 ticks = 60
@@ -15,10 +17,16 @@ baudrate = 500000
 
 # ========= Função Background ========
 def main():
-
+    dadosOutput = dadosPost
     dados = json.loads(requests.get( URL, params= {'usuario': usuario}).content.decode('utf-8'))
-#    print(json.dumps(dados).encode('utf-8'))
-    ser.write(json.dumps(dados).encode('utf-8')+'\x03')
+    try:
+        ser.write(json.dumps(dados).encode('utf-8')+'\x03')
+    except SerialTimeoutException:
+        pass
+    if (ser.in_waiting and dadosOutput["dados"]["arduino"]):
+        pass
+    else:
+        pass
 
 # ======= Criação de loop de intervalo
 
@@ -29,8 +37,17 @@ if __name__ == '__main__':
         #cria uma instância para porta serial
     sched = BackgroundScheduler({'apscheduler.job_defaults.max_instances': '20'})
         #cria uma instância para loop de intervalo
+    cpu = CPUTemperature()
     sched.add_job(main, 'interval', seconds=1/ticks)
     sched.start()
+
+    dadosPost = {
+        "usuario" : usuario,
+        "dados" : {
+            "temperatura" : 0.00,
+            "arduino": False
+        }
+    }
 
     # =========== Comandos "setup" =====
     try:
