@@ -1,32 +1,3 @@
-//Variáveis de status
-
-let cooler = true;
-let power = true;
-
-// ======= Funções de Status ===========
-
-function coolerToggle(){
-    if(cooler){
-        $('#coolerStatus').text("CoolerOff");
-        $('#coolerStatus').css('background-color','#ff471a');
-    }else{
-        $('#coolerStatus').text("CoolerOn");
-        $('#coolerStatus').css('background-color','#00b33c');
-    }
-    cooler=!cooler;
-}
-
-function powerToggle(){
-    if(power){
-        $('#powerStatus').text("PowerOff");
-        $('#powerStatus').css('background-color','#ff471a');
-    }else{
-        $('#powerStatus').text("PowerOn");
-        $('#powerStatus').css('background-color','#00b33c');
-    }
-    power=!power;
-}
-
 // ======= Funções do Controle ==========
 
 function getInput(){
@@ -69,23 +40,18 @@ function getInput(){
 
 window.addEventListener("gamepadconnected", (event) => {
     controleConectado = true;
-    $('#warn-controle').text("Controle: conectado")
-    $('.toHide').show();
 });
 
 window.addEventListener("gamepaddisconnected", (event) => {
     controleConectado = false;
-    $('#warn-controle').text("Controle: desconectado");
-    $('#warn-http').text("HTTP:");
-    $('.toHide').hide();
 });
 
 // ======= Funções do Servidor ==========
 
-function postControle(){
+function postHTTP(){
     let dados = {
-        controle : getInput(),
         usuario : usuario,
+        controle : getInput(),
         status : {
             power : power,
             cooler : cooler,
@@ -94,11 +60,23 @@ function postControle(){
     $('#test').text(JSON.stringify(dados,null,'\t'));
 
     $.post(
-        URL,JSON.stringify(dados),
-        (res , status) => {
-            if(status == "success"){
-                $('#warn-http').text("HTTP: sucesso");
+        URL,
+        JSON.stringify(dados),
+        (_res, status) => status=="success" ? server = true : null
+    ).fail(() => server = false);
+};
+
+function getHTTP(){
+    $.get(
+        URL,
+        { usuario: usuario },
+        (dados, status) => {
+            status=="success" ? server = true : null;
+            dados = JSON.parse(dados);
+            RPi = dados.connected;
+            if (RPi){
+                dados = dados.dados;
             }
         }
-    ).fail(() => $('#warn-http').text("HTTP: erro"));
-};
+    );
+}

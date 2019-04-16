@@ -19,3 +19,5 @@ Bibliotecas
 A fazer:<br/>
   testar maior baudrate serial<br/>
   alterar entrada de string serial arduino (menos ram)<br/>
+  criar funcao q atualiza dados de ui<br>
+  testar servidor.RPiConnection

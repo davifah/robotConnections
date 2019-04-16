@@ -22,15 +22,15 @@
         <tr>
             <td id="warn-arduino" class="warning" align="right">Arduino: desconectado</td>
             <td id="warn-temp" class="warning" align="center">Temperatura: 60°C</td>
-            <td id="warn-speed" class="warning" align="left">Velocidade: 32 km/h</td>
+            <td id="warn-rpi" class="warning" align="left">RPi: desconectada</td>
         </tr>
     </table>
 
     <div id="video-container"></div>
 
     <div id="button-container">
-        <button id="powerStatus" onClick="powerToggle()" class="toHide">PowerOn</button>
-        <button id="coolerStatus" onClick="coolerToggle()" class="toHide">CoolerOn</button>
+        <button id="powerStatus" onClick="power=!power" class="toHide">PowerOn</button>
+        <button id="coolerStatus" onClick="cooler=!cooler" class="toHide">CoolerOn</button>
     </div>
     
 </body>

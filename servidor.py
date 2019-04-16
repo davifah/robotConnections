@@ -11,8 +11,13 @@ app = web.application(urls, globals())
 
 # ============== Variáveis ===============
 
-app.controleDados = None    # Inicializa uma variável global sem valor
-app.arduinoDados = None
+app.uiData = None    # Inicializa uma variável global sem valor
+app.RPiData = {
+	"connected" : False,
+	"dados" : None
+}
+app.RPiConnection = 0
+app.timeout = 30
 
 # ===== Classe de Serviço e funções ======
 
@@ -29,9 +34,12 @@ class pyServer:
 		print(entrada)
 
 		if entrada["usuario"] == 'ui':
-			pass
+			if app.RPiConnection >= app.timeout:
+				app.RPiData["connected"] = False
+			return json.dumps(app.RPiData)
+
 		elif entrada["usuario"] == 'RPi':
-			return json.dumps(app.controleDados)
+			return json.dumps(app.uiData)
 
 	def POST(self, name):
 
@@ -42,10 +50,14 @@ class pyServer:
 		dados = json.loads(web.data().decode('utf-8'))
 
 		if dados["usuario"] == 'ui':
-			app.controleDados = dados
-			print (app.controleDados["controle"]["triggers"]["right"])
+			app.RPiConnection += 1
+			app.uiData = dados
 			return None
+
 		elif dados["usuario"] == 'RPi':
+			app.RPiConnection = 0
+			app.RPiData["dados"] = dados
+			app.RPiData["connected"] = True
 			return None
 
 
