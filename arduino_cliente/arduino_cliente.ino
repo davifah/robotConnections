@@ -1,16 +1,18 @@
 #include <ArduinoJson.h>
 
 #define poten A0
-#define led 7
+#define green 31
 #define red 9
-#define baudrate 500000
+#define white 7
+#define baudrate 200000
 
 // ============== Função de configuração ==========
 
 void setup()
 {
 	pinMode(poten, INPUT);
-	pinMode(led, OUTPUT);
+	pinMode(green, OUTPUT);
+	pinMode(white, OUTPUT);
 	pinMode(red, OUTPUT);
 	Serial.begin(115200);
 	Serial1.begin(baudrate);
@@ -29,30 +31,38 @@ void loop()
 
 		digitalWrite(red, LOW);
 
+		String input = Serial1.readStringUntil('\x03');
+
 		StaticJsonDocument<500> doc;
-		DeserializationError jsonErro = deserializeJson(doc, Serial1.readStringUntil('\x03'));
+		DeserializationError jsonErro = deserializeJson(doc, input);
 
 		if (jsonErro)
 		{
 			Serial.print("Erro: ");
 			Serial.print(jsonErro.c_str());
+			Serial.println(input);
 		}
 		else
 		{
 			int RTrigger = doc["controle"]["triggers"]["left"];
+			bool Xled = doc["controle"]["buttons"]["cross"];
 			Serial.println(RTrigger);
 
-			analogWrite(led, map(RTrigger, 0, 1000, 0, 255));
+			digitalWrite(green, Xled);
+			analogWrite(white, map(RTrigger, 0, 1000, 0, 255));
 		}
 
 		doc.clear();
+		String output;
 
 		doc["potenciometro"] = analogRead(poten);
-		serializeJson(doc, Serial1);
+		serializeJson(doc, output);
+
+		Serial1.print(output+'\n');
+		Serial.println(output);
 	}
 	else
 	{
-
 		digitalWrite(red, HIGH);
 	}
 }

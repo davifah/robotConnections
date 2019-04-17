@@ -9,11 +9,11 @@ from gpiozero import CPUTemperature
 # biblioteca para monitorar temperatura da cpu
 
 # ============ Variáveis =============
-ticks = 10
+ticks = 7
 URL = 'http://192.168.0.17:8080'
 arduinoPort = '/dev/ttyS0'
 usuario = 'RPi'
-baudrate = 500000
+baudrate = 200000
 
 # ========= Função Background ========
 
@@ -24,14 +24,17 @@ def main():
 
     ser.write(json.dumps(dados).encode('utf-8')+b'\x03')
 
-    if (ser.in_waiting and dadosOutput["dados"]["arduino"]):
-        arduinoInput = json.loads(ser.read())
-        dadosOutput["dados"]["potenciometro"] = int(
-            arduinoInput["potenciometro"])
+    readSerial = ser.read_until().decode('utf-8')
+    if(readSerial):
+        dadosOutput["dados"]["arduino"] = True
     else:
         dadosOutput["dados"]["arduino"] = False
 
-    dadosOutput["dados"]["temperatura"] = round(cpu.temperature)
+    arduinoInput = json.loads(readSerial) #json.decoder.JSONDecodeError
+
+    dadosOutput["dados"]["potenciometro"] = int(arduinoInput["potenciometro"])
+
+    dadosOutput["dados"]["temperatura"] = round(cpu.temperature, 1)
 
     requests.post(URL, json=dadosOutput)
 
