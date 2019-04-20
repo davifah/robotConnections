@@ -76,7 +76,9 @@ function getHTTP() {
 			RPi = dados.connected;
 			if (RPi) {
 				dados = dados.dados;
+				arduino = dados.dados.arduino;
 				temperatura = parseFloat(dados.dados.temperatura);
+				tickrate = parseInt(dados.dados.ticks);
 			}
 		}
 	);

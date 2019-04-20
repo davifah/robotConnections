@@ -15,11 +15,12 @@ let controleConectado = false;
 let arduino = false;
 let RPi = false;
 let temperatura = 0.00;
+let tickrate
 
 // ========== Função de loop ============
 
 // Variáveis para determinar o número de atualizaçoes por segundo
-const ticks = 60;
+const ticks = 20;
 
 // Funçao executada automaticamente $ticks vezes por segundo
 window.setInterval(function () {
@@ -70,10 +71,15 @@ function setStatus() {
 	}
 
 	if (RPi) {
+		$('#warn-tickrate').text(`Tickrate: ${tickrate}`);
 		$('#warn-rpi').text("RPi: conectada");
 		$('#warn-temp').text(`Temperatura: ${temperatura} °C`);
+		if (arduino) $('#warn-arduino').text("Arduino: conectado");
+		else $('#warn-arduino').text("Arduino: desconectado");
 	} else {
+		$('#warn-tickrate').text("Tickrate:");
 		$('#warn-rpi').text("RPi: desconectada");
 		$('#warn-temp').text("Temperatura:");
+		$('#warn-arduino').text("Arduino: desconectado");
 	}
 }
