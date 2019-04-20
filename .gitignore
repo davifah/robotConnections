@@ -1,3 +1,2 @@
-.vscode/ipch
-.__pycache__/*
-.vscode/arduino.json
+.vscode
+__pycache__
