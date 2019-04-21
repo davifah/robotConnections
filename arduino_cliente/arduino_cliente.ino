@@ -16,7 +16,6 @@ void setup()
 	pinMode(red, OUTPUT);
 	Serial.begin(115200);
 	Serial1.begin(baudrate);
-	digitalWrite(red, HIGH);
 	Serial.println("Iniciando...");
 }
 
@@ -29,7 +28,7 @@ void loop()
 	if (Serial1.available())
 	{
 
-		digitalWrite(red, LOW);
+		digitalWrite(red, HIGH);
 
 		String input = Serial1.readStringUntil('\x03');
 
@@ -58,11 +57,11 @@ void loop()
 		doc["potenciometro"] = analogRead(poten);
 		serializeJson(doc, output);
 
-		Serial1.print(output+'\n');
+		Serial1.print(output + '\n');
 		Serial.println(output);
 	}
 	else
 	{
-		digitalWrite(red, HIGH);
+		digitalWrite(red, LOW);
 	}
 }
