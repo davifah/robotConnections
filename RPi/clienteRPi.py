@@ -47,10 +47,7 @@ def main():
 
     ser.write(json.dumps(dados).encode('utf-8')+b'\x03')
 
-    try:
-        readSerial = ser.read_until().decode('utf-8')
-    except TimeoutError:
-        print("Timeout")
+    readSerial = ser.read_until().decode('utf-8')
     
     if(readSerial):
         dadosOutput["dados"]["arduino"] = True
@@ -84,6 +81,8 @@ try:
             main()
         except (KeyboardInterrupt, SystemExit):
             raise
+        except requests.exceptions.RequestException:
+            print("Erro na conexão com o server")
         except:
             print("Erro")
             erro()
