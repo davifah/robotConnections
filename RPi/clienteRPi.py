@@ -12,6 +12,9 @@ URL = 'http://192.168.0.17:8080'
 arduinoPort = '/dev/ttyS0'
 usuario = 'RPi'
 baudrate = 200000
+server = True
+arduino = True
+serverErrorCounter = 0
 
 # =========== Instâncias =========
 
@@ -82,10 +85,21 @@ try:
         except (KeyboardInterrupt, SystemExit):
             raise
         except requests.exceptions.RequestException:
-            print("Erro na conexão com o server")
+            if server:
+                print("Erro na conexão com o servidor")
+                server = False
         except:
-            print("Erro")
+            if arduino:
+                print("Erro na conexão com o arduino")
+                arduino = False
             erro()
+        else:
+            if not server:
+                print("Servidor conectado")
+                server = True
+            if not arduino:
+                print("Arduino conectado")
+                arduino = True
 
 except (KeyboardInterrupt, SystemExit):
-    print('Encerrando o programa')
+    print("Encerrando o programa")
