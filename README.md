@@ -1,23 +1,22 @@
-python v3.6.7
-arduino IDE v1.8.x
-VSCode v1.31
+python v3.6.7<br/>
+arduino IDE v1.8.x<br/>
+VSCode v1.31<br/><br/>
 
-Bibliotecas
-  RPi:
-    apscheduler
-    pyserial
-    json
-    requests
+Bibliotecas<br/>
+  RPi:<br/>
+    CPUTemperature<br/>
+    pyserial<br/>
+    json<br/>
+    requests<br/>
     
-  Servidor:
-    web.py (--pre)
-    json
+  Servidor:<br/>
+    web.py (--pre)<br/>
+    json<br/>
     
-   Arduino:
-    ArduinoJson (v6)
+   Arduino:<br/>
+    ArduinoJson (v6)<br/>
 
 A fazer:<br/>
-  testar maior baudrate serial<br/>
-  alterar entrada de string serial arduino (menos ram)<br/>
-  criar funcao q atualiza dados de ui<br>
-  testar servidor.RPiConnection
+  estilização da página<br/>
+  Cooler off<br/>
+  dados da ui<br>
