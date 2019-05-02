@@ -20,9 +20,9 @@
 	<span id="test" class="warning"></span>
 	<table id="warning-table">
 		<tr>
-			<td id="warn-controle" class="warning" align="right"></td>
-			<td id="warn-http" class="warning" align="center"></td>
-			<td id="warn-webcam" class="warning" align="left"></td>
+			<td id="warn-http" class="warning" align="right"></td>
+			<td id="warn-controle" class="warning" align="center"></td>
+			<td id="warn-direcao" class="warning" align="left"></td>
 		</tr>
 		<tr>
 			<td id="warn-arduino" class="warning" align="right"></td>
@@ -30,8 +30,17 @@
 			<td id="warn-rpi" class="warning" align="left"></td>
 		</tr>
 		<tr>
-			<td id="warn-tickrate" class="warning" align="right"></td>
+			<td id="" class="warning" align="right"></td>
+			<td align="center"><button class="warning toHide" id="sensorsStatus" onClick="menuClick()"></button></td>
  		</tr>
+	</table>
+
+	<table id="sensors-table">
+		<tr>
+			<td id="warn-tickrate" class="warning" align="right"></td>
+			<td id="warn-webcam" class="warning" align="center"></td>
+			<td></td>
+		</tr>
 	</table>
 
 	<div id="video-container"></div>

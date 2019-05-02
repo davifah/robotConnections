@@ -6,15 +6,7 @@
 const URL = 'http://127.0.0.1:8080';
 const usuario = 'ui';
 
-//Variáveis de status
-
-let cooler = true;
-let power = true;
-let server = false;
-let controleConectado = false;
-let arduino = false;
-let RPi = false;
-let temperatura = 0.00;
+let temperatura;
 let tickrate
 
 // ========== Função de loop ============
