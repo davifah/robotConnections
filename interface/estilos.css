@@ -3,8 +3,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-};
+}
 
+;
 html,
 body {
     height: 100%;
@@ -24,9 +25,11 @@ table {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: red;
 }
 
-th, td {
+th,
+td {
     border: none;
     padding: 3px;
 }
@@ -47,6 +50,7 @@ td {
     border: none;
     border-radius: 8px;
     background-color: #1d1f4c;
+    color: whitesmoke;
 }
 
 #sensors-table {
@@ -63,7 +67,7 @@ td {
 }
 
 #button-container button {
-    height:  36px;
+    height: 36px;
     width: 120px;
     background-color: #00b33c;
     color: white;
@@ -99,7 +103,3 @@ button:hover {
 .toHide {
     display: none;
 }
-
-.warning {
-    color: red;
-};
