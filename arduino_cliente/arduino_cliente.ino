@@ -1,10 +1,11 @@
 #include <ArduinoJson.h>
+#include "Motor.h"
 
 #define poten A0
 #define green 7
 #define red 9
 #define white 8
-#define baudrate 115200
+#define baudrate 200000
 #define motorDa 12
 #define motorDb 13
 
@@ -12,9 +13,6 @@
 
 void setup()
 {
-	pinMode(motorDa, OUTPUT);
-	pinMode(motorDb, OUTPUT);
-
 	pinMode(poten, INPUT);
 	pinMode(green, OUTPUT);
 	pinMode(white, OUTPUT);
@@ -25,6 +23,8 @@ void setup()
 }
 
 // ============= Variaveis Globais ===============
+
+Motor direito(motorDa, motorDb);
 
 // ============== Função de loop =================
 
@@ -54,8 +54,9 @@ void loop()
 			digitalWrite(green, doc["greenLED"].as<bool>());
 			analogWrite(white, doc["brightLED"].as<int>());
 
-			analogWrite(motorDa, doc["motorD"]["a"].as<int>());
-			analogWrite(motorDb, doc["motorD"]["b"].as<int>());
+			direito.run(doc["motorD"]["a"].as<int>(), doc["motorD"]["b"].as<int>());
+			//			analogWrite(motorDa, doc["motorD"]["a"].as<int>());
+			//			analogWrite(motorDb, doc["motorD"]["b"].as<int>());
 		}
 
 		doc.clear();
