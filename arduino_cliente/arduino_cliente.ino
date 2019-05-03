@@ -2,11 +2,11 @@
 
 #define poten A0
 #define green 7
-#define red 8
-#define white 9
-#define baudrate 200000
-#define motorDa 1
-#define motorDb 2
+#define red 9
+#define white 8
+#define baudrate 115200
+#define motorDa 12
+#define motorDb 13
 
 // ============== Função de configuração ==========
 
@@ -37,6 +37,8 @@ void loop()
 
 		String input = Serial1.readStringUntil('\x03');
 
+		Serial.println(input);
+
 		StaticJsonDocument<500> doc;
 		DeserializationError jsonErro = deserializeJson(doc, input);
 
@@ -48,12 +50,12 @@ void loop()
 		}
 		else
 		{
-			Serial.println(doc["brightLED"]);
-			digitalWrite(green, doc["greenLED"]);
-			analogWrite(white, doc["brightLED"]);
+			Serial.println(bool(doc["greenLED"]));
+			digitalWrite(green, doc["greenLED"].as<bool>());
+			analogWrite(white, doc["brightLED"].as<int>());
 
-			analogWrite(motorDa, doc["motor"]["a"]);
-			analogWrite(motorDb, doc["motor"]["b"]);
+			analogWrite(motorDa, doc["motorD"]["a"].as<int>());
+			analogWrite(motorDb, doc["motorD"]["b"].as<int>());
 		}
 
 		doc.clear();
