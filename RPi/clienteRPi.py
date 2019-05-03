@@ -33,13 +33,10 @@ tmp = Tempo()
 # Dicionário (do JS: Objeto) de dados
 dadosPost = {
     "usuario": usuario,
-    "dados": {
-        "temperatura": 0.00,
-        "arduino": False,
-        "potenciometro": None,
-        "ticks": 0
-    }
-
+    "temperatura": 0.00,
+    "arduino": False,
+    "potenciometro": None,
+    "ticks": 0
 }
 
 # ========= Funções ============
@@ -53,26 +50,26 @@ def main():
     readSerial = ser.read_until().decode('utf-8')
     
     if(readSerial):
-        dadosOutput["dados"]["arduino"] = True
+        dadosOutput["arduino"] = True
     else:
-        dadosOutput["dados"]["arduino"] = False
+        dadosOutput["arduino"] = False
 
     try:
         arduinoInput = json.loads(readSerial) #json.decoder.JSONDecodeError
     except json.decoder.JSONDecodeError:
-        dadosOutput["dados"]["arduino"] = False
+        dadosOutput["arduino"] = False
 
-    dadosOutput["dados"]["potenciometro"] = int(arduinoInput["potenciometro"])
-    dadosOutput["dados"]["temperatura"] = round(cpu.temperature, 1)
-    dadosOutput["dados"]["ticks"] = tmp.setTicks()
+    dadosOutput["potenciometro"] = int(arduinoInput["potenciometro"])
+    dadosOutput["temperatura"] = round(cpu.temperature, 1)
+    dadosOutput["ticks"] = tmp.setTicks()
 
     requests.post(URL, json=dadosOutput)
 
 def erro():
     dadosOutput = dadosPost
-    dadosOutput["dados"]["arduino"] = False
-    dadosOutput["dados"]["temperatura"] = round(cpu.temperature, 1)
-    dadosOutput["dados"]["ticks"] = tmp.setTicks()
+    dadosOutput["arduino"] = False
+    dadosOutput["temperatura"] = round(cpu.temperature, 1)
+    dadosOutput["ticks"] = tmp.setTicks()
 
     requests.post(URL, json=dadosOutput)
     
