@@ -44,7 +44,7 @@ function output(controle) {
     let dados = {
         usuario: usuario,
 
-        brightLED: map(controle.triggers.left, 0, 1000, 0, 255),
+        brightLED: Math.round(map(controle.triggers.left, 0, 1000, 0, 255)),
         greenLED: controle.buttons.cross,
 
         status: {
@@ -68,7 +68,7 @@ function output(controle) {
     const motores_min = 130;
     const motores_max = 255;
     if (power && controle.triggers.right >= controle_min) {
-        potencia = map(controle.triggers.right, controle_min, 1000, motores_min, motores_max);
+        potencia = Math.round(map(controle.triggers.right, controle_min, 1000, motores_min, motores_max));
 
         if (direcao) {    //motores devem girar para frente
             dados.motorD.a = potencia;
