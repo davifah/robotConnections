@@ -1,9 +1,9 @@
 #include <ArduinoJson.h>
 
 #define poten A0
-#define green 31
-#define red 9
-#define white 7
+#define green 7
+#define red 8
+#define white 9
 #define baudrate 200000
 
 // ============== Função de configuração ==========
