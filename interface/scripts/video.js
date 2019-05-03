@@ -33,5 +33,5 @@ function buildVideo(videoID){
             })
         });
     }
-    $('#warn-webcam').text("Cameras: "+videoID.length);
+    $('#webcam').text(`Cameras: ${videoID.length}`);
 }

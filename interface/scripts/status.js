@@ -52,13 +52,18 @@ function setStatus() {
 		}
 
 		if (RPi) {
-			$('#warn-tickrate').text(`Tickrate: ${tickrate}`);
+			$('#tickrate').text(`Tickrate: ${tickrate}`);
 			$('#warn-rpi').text("RPi: conectada");
 			$('#warn-temp').text(`Temperatura: ${temperatura} °C`);
-			if (arduino) $('#warn-arduino').text("Arduino: conectado");
-			else $('#warn-arduino').text("Arduino: desconectado");
+			if (arduino){
+				$('#warn-arduino').text("Arduino: conectado");
+				$('#potenciometro').text(`Potenciometro: ${potenciometro}`);
+			}else{
+				$('#warn-arduino').text("Arduino: desconectado");
+				$('#potenciometro').text("Potenciometro: ");
+			}
 		} else {
-			$('#warn-tickrate').text("Tickrate:");
+			$('#tickrate').text("Tickrate:");
 			$('#warn-rpi').text("RPi: desconectada");
 			$('#warn-temp').text("Temperatura:");
 			$('#warn-arduino').text("Arduino: desconectado");

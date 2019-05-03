@@ -23,6 +23,7 @@ function getHTTP() {
                 arduino = input.arduino;
                 temperatura = parseFloat(input.temperatura);
                 tickrate = parseInt(input.ticks);
+                potenciometro = parseInt(input.potenciometro);
             }
         }
     );
