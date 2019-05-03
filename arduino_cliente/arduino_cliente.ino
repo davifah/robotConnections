@@ -5,11 +5,16 @@
 #define red 9
 #define white 7
 #define baudrate 200000
+#define motorDa 1
+#define motorDb 2
 
 // ============== Função de configuração ==========
 
 void setup()
 {
+	pinMode(motorDa, OUTPUT);
+	pinMode(motorDb, OUTPUT);
+
 	pinMode(poten, INPUT);
 	pinMode(green, OUTPUT);
 	pinMode(white, OUTPUT);
@@ -43,12 +48,12 @@ void loop()
 		}
 		else
 		{
-			int RTrigger = doc["controle"]["triggers"]["left"];
-			bool Xled = doc["controle"]["buttons"]["cross"];
-			Serial.println(RTrigger);
+			Serial.println(doc["brightLED"]);
+			digitalWrite(green, doc["greenLED"]);
+			analogWrite(white, doc["brightLED"]);
 
-			digitalWrite(green, Xled);
-			analogWrite(white, map(RTrigger, 0, 1000, 0, 255));
+			analogWrite(motorDa, doc["motor"]["a"]);
+			analogWrite(motorDb, doc["motor"]["b"]);
 		}
 
 		doc.clear();
