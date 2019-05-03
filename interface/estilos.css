@@ -3,8 +3,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-};
+}
 
+;
 html,
 body {
     height: 100%;
@@ -19,21 +20,42 @@ body {
 
 table {
     border: none;
-    width: 100%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 5px;
+    color: red;
 }
 
-th, td {
+th,
+td {
     border: none;
     padding: 3px;
 }
 
 td {
     width: 300px;
+}
+
+#warnings-table {
+    margin-top: 5px;
+}
+
+#sensorsStatus {
+    font-weight: bold;
+    height: auto;
+    width: auto;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1d1f4c;
+    color: whitesmoke;
+}
+
+#sensors-table {
+    width: auto;
+    display: none;
 }
 
 #button-container {
@@ -45,7 +67,7 @@ td {
 }
 
 #button-container button {
-    height:  36px;
+    height: 36px;
     width: 120px;
     background-color: #00b33c;
     color: white;
@@ -81,7 +103,3 @@ button:hover {
 .toHide {
     display: none;
 }
-
-.warning {
-    color: red;
-};

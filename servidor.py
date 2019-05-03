@@ -51,11 +51,13 @@ class pyServer:
         dados = json.loads(web.data().decode('utf-8'))
 
         if dados["usuario"] == 'ui':
+            del dados["usuario"]
             app.RPiConnection += 1
             app.uiData = dados
             return None
 
         elif dados["usuario"] == 'RPi':
+            del dados["usuario"]
             app.RPiConnection = 0
             app.RPiData["dados"] = dados
             app.RPiData["connected"] = True
