@@ -16,14 +16,14 @@ function getHTTP() {
         { usuario: usuario },
         (dados, status) => {
             status == "success" ? server = true : null;
-            $('#test').text(dados);
+            //            console.log(dados);
             input = JSON.parse(dados);
             RPi = input.connected;
             if (RPi) {
-                arduino = input.arduino;
-                temperatura = parseFloat(input.temperatura);
-                tickrate = parseInt(input.ticks);
-                potenciometro = parseInt(input.potenciometro);
+                arduino = input.dados.arduino;
+                temperatura = parseInt(input.dados.temperatura);
+                tickrate = parseInt(input.dados.ticks);
+                potenciometro = parseInt(input.dados.potenciometro);
             }
         }
     );
