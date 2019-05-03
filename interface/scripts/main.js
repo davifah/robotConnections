@@ -12,7 +12,7 @@ let tickrate
 // ========== Função de loop ============
 
 // Variáveis para determinar o número de atualizaçoes por segundo
-const ticks = 20;
+const ticks = 30;
 
 // Funçao executada automaticamente $ticks vezes por segundo
 window.setInterval(function () {
