@@ -1,13 +1,32 @@
 #include <ArduinoJson.h>
-#include "Motor.h"
+#include "classes/Motor.h"
+#include "classes/Sharp.h"
+#include "classes/Acelerometro.h"
 
 #define poten A0
 #define green 7
 #define red 9
 #define white 8
+
 #define baudrate 200000
+
 #define motorDa 12
 #define motorDb 13
+
+#define pinX 1
+#define pinY 2
+#define pinZ 3
+
+#define sharpPin A0
+
+// ========== Instanciações ================
+
+Motor direito(motorDa, motorDb);
+Sharp sharp(sharpPin);
+
+// ============= Variaveis Globais ===============
+
+unsigned int acX, acY, acZ;
 
 // ============== Função de configuração ==========
 
@@ -17,14 +36,11 @@ void setup()
 	pinMode(green, OUTPUT);
 	pinMode(white, OUTPUT);
 	pinMode(red, OUTPUT);
+	Acelerometro(pinX, pinY, pinZ, &acX, &acY, &acZ);
 	Serial.begin(115200);
 	Serial1.begin(baudrate);
 	Serial.println("Iniciando...");
 }
-
-// ============= Variaveis Globais ===============
-
-Motor direito(motorDa, motorDb);
 
 // ============== Função de loop =================
 
