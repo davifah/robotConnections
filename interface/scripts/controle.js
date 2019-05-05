@@ -37,14 +37,15 @@ function getInput() {
         },
     }
 
-    return output(controle);
+    return controle;
 }
 
-function output(controle) {
+function dadosOutput() {
+    let controle = getInput();
     let dados = {
         usuario: usuario,
 
-        brightLED: Math.round(map(controle.triggers.left, 0, 1000, 0, 255)),
+        brightLED: map(controle.triggers.left, 0, 1000, 0, 255),
         greenLED: controle.buttons.cross,
 
         status: {
@@ -64,18 +65,37 @@ function output(controle) {
     if (controle.buttons.triangle == true && triangleAnterior != true) direcao = !direcao;
     triangleAnterior = controle.buttons.triangle;
 
-    const controle_min = 100;
+    const analog_min = 300;
+    const trigger_min = 100;
     const motores_min = 130;
     const motores_max = 255;
-    if (power && controle.triggers.right >= controle_min) {
-        potencia = Math.round(map(controle.triggers.right, controle_min, 1000, motores_min, motores_max));
 
-        if (direcao) {    //motores devem girar para frente
-            dados.motorD.a = potencia;
+    if (power && controle.triggers.right >= trigger_min) {
+        if (Math.abs(controle.lBall.x) >= analog_min) {
 
-        } else {          //motores devem girar para trás
-            dados.motorD.b = potencia;
+            analog = Math.abs(controle.lBall.x);
+            potencia = map(analog, analog_min, 1000, motores_min, motores_max);
+            
+            if (controle.lBall.x > 0) {                 //virar para a direita
+                dados.motorD.b = potencia;
+                dados.motorE.a = potencia;
+            } else {                                    //virar para a esquerda
+                dados.motorD.a = potencia;
+                dados.motorE.b = potencia;
+            }
 
+        } else {
+            potencia = map(controle.triggers.right, trigger_min, 1000, motores_min, motores_max);
+
+            if (direcao) {    //motores devem girar para frente
+                dados.motorD.a = potencia;
+                dados.motorE.a = potencia;
+
+            } else {          //motores devem girar para trás
+                dados.motorD.b = potencia;
+                dados.motorE.b = potencia;
+
+            }
         }
     }
 
@@ -93,5 +113,5 @@ window.addEventListener("gamepaddisconnected", () => {
 
 //Função map
 function map(x, in_min, in_max, out_min, out_max) {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return Math.round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 }
