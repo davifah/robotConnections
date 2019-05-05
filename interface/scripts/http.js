@@ -1,7 +1,7 @@
 // ======= Funções do Servidor ==========
 
 function postHTTP() {
-    let output = getInput();
+    let output = dadosOutput();
 
     $.post(
         URL,
