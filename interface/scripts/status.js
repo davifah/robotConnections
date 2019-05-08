@@ -1,7 +1,7 @@
 
 //Variáveis de status
 
-let cooler = true;
+let cooler = false;
 let RPi = false;
 let power = true;
 let sensors = false;

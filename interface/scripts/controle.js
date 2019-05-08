@@ -65,17 +65,17 @@ function dadosOutput() {
     if (controle.buttons.triangle == true && triangleAnterior != true) direcao = !direcao;
     triangleAnterior = controle.buttons.triangle;
 
-    const analog_min = 300;
-    const trigger_min = 100;
-    const motores_min = 130;
+    const analog_min = 90;
+    const trigger_min = 20;
+    const motores_min = 80;
     const motores_max = 255;
 
-    if (power && controle.triggers.right >= trigger_min) {
+    if (power) {
         if (Math.abs(controle.lBall.x) >= analog_min) {
 
             analog = Math.abs(controle.lBall.x);
             potencia = map(analog, analog_min, 1000, motores_min, motores_max);
-            
+
             if (controle.lBall.x > 0) {                 //virar para a direita
                 dados.motorD.b = potencia;
                 dados.motorE.a = potencia;
@@ -84,7 +84,7 @@ function dadosOutput() {
                 dados.motorE.b = potencia;
             }
 
-        } else {
+        } else if (controle.triggers.right >= trigger_min) {
             potencia = map(controle.triggers.right, trigger_min, 1000, motores_min, motores_max);
 
             if (direcao) {    //motores devem girar para frente

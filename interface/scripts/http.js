@@ -16,7 +16,7 @@ function getHTTP() {
         { usuario: usuario },
         (dados, status) => {
             status == "success" ? server = true : null;
-            //            console.log(dados);
+//            console.log(dados);
             input = JSON.parse(dados);
             RPi = input.connected;
             if (RPi) {
