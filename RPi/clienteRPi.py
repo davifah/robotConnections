@@ -8,7 +8,7 @@ from gpiozero import CPUTemperature
 from classes.tempo import Tempo
 
 # ============ Variáveis =============
-URL = 'http://192.168.0.17:8080'
+URL = 'http://10.1.0.1:8080'
 arduinoPort = '/dev/ttyS0'
 usuario = 'RPi'
 baudrate = 200000
