@@ -1,7 +1,9 @@
 #include <ArduinoJson.h>
 #include "classes/Motor.h"
 #include "classes/Sharp.h"
-#include "classes/Acelerometro.h"
+//#include "classes/Acelerometro.h"
+#include "classes/Sharp.h"
+#include "classes/DigitalOutput.h"
 
 #define poten A0
 #define green 7
@@ -11,22 +13,21 @@
 #define baudrate 200000
 
 #define motorDa 12
-#define motorDb 13
+#define motorDb 11
 
-#define pinX 1
-#define pinY 2
-#define pinZ 3
-
+#define COOLER_PINO 6
 #define sharpPin A0
+
+// ============= Variaveis Globais ===============
+
+unsigned int acX, acY, acZ;
 
 // ========== Instanciações ================
 
 Motor direito(motorDa, motorDb);
 Sharp sharp(sharpPin);
-
-// ============= Variaveis Globais ===============
-
-unsigned int acX, acY, acZ;
+DigitalOutput cooler(COOLER_PINO);
+//Acelerometro ac();
 
 // ============== Função de configuração ==========
 
@@ -36,7 +37,6 @@ void setup()
 	pinMode(green, OUTPUT);
 	pinMode(white, OUTPUT);
 	pinMode(red, OUTPUT);
-	Acelerometro(pinX, pinY, pinZ, &acX, &acY, &acZ);
 	Serial.begin(115200);
 	Serial1.begin(baudrate);
 	Serial.println("Iniciando...");
@@ -53,7 +53,7 @@ void loop()
 
 		String input = Serial1.readStringUntil('\x03');
 
-		Serial.println(input);
+//		Serial.println(input);
 
 		StaticJsonDocument<500> doc;
 		DeserializationError jsonErro = deserializeJson(doc, input);
@@ -66,13 +66,11 @@ void loop()
 		}
 		else
 		{
-			Serial.println(bool(doc["greenLED"]));
 			digitalWrite(green, doc["greenLED"].as<bool>());
 			analogWrite(white, doc["brightLED"].as<int>());
 
 			direito.run(doc["motorD"]["a"].as<int>(), doc["motorD"]["b"].as<int>());
-			//			analogWrite(motorDa, doc["motorD"]["a"].as<int>());
-			//			analogWrite(motorDb, doc["motorD"]["b"].as<int>());
+			cooler.set(doc["status"]["cooler"].as<bool>());
 		}
 
 		doc.clear();
@@ -82,7 +80,6 @@ void loop()
 		serializeJson(doc, output);
 
 		Serial1.print(output + '\n');
-		Serial.println(output);
 	}
 	else
 	{
