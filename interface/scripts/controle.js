@@ -45,9 +45,6 @@ function dadosOutput() {
     let dados = {
         usuario: usuario,
 
-        brightLED: map(controle.triggers.left, 0, 1000, 0, 255),
-        greenLED: controle.buttons.cross,
-
         status: {
             cooler: cooler
         },

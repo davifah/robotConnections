@@ -21,7 +21,6 @@ DigitalOutput::DigitalOutput(unsigned int pin)
 
 void DigitalOutput::set(bool sinal)
 {
-  Serial.println(sinal);
   digitalWrite(pino, sinal);
 }
 

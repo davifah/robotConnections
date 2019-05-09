@@ -6,16 +6,14 @@
 #include "classes/DigitalOutput.h"
 
 #define poten A0
-#define green 7
 #define red 9
-#define white 8
 
 #define baudrate 200000
 
 #define motorDa 12
 #define motorDb 11
 
-#define COOLER_PINO 6
+#define COOLER_PINO 2
 #define sharpPin A0
 
 // ============= Variaveis Globais ===============
@@ -34,8 +32,6 @@ DigitalOutput cooler(COOLER_PINO);
 void setup()
 {
 	pinMode(poten, INPUT);
-	pinMode(green, OUTPUT);
-	pinMode(white, OUTPUT);
 	pinMode(red, OUTPUT);
 	Serial.begin(115200);
 	Serial1.begin(baudrate);
@@ -66,9 +62,6 @@ void loop()
 		}
 		else
 		{
-			digitalWrite(green, doc["greenLED"].as<bool>());
-			analogWrite(white, doc["brightLED"].as<int>());
-
 			direito.run(doc["motorD"]["a"].as<int>(), doc["motorD"]["b"].as<int>());
 			cooler.set(doc["status"]["cooler"].as<bool>());
 		}
