@@ -65,7 +65,7 @@ function dadosOutput() {
     const analog_min = 90;
     const trigger_min = 20;
     const motores_min = 80;
-    const motores_max = 255;
+    const motores_max = 255;    // 215 para regular tensão (14.8 => 12V)
 
     if (power) {
         if (Math.abs(controle.lBall.x) >= analog_min) {
